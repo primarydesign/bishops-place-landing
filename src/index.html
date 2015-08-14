@@ -17,17 +17,20 @@
    </div>
    <div class="sg-wrapper sg-right">
       <section id="learn-more" class="sg-box">
-         <a data-ax="email-form">+Learn More</a>
+         <a data-ax="contact-form">+Learn More</a>
       </section>
       <section class="form-constraint sg-box">
-         <section class="email-form-wrapper sg-box" data-ax-catch="email-form">
+         <section class="contact-form-wrapper sg-box" data-ax-catch="contact-form">
             <div class="inner">
-               <a class="close" data-ax-negate="email-form">Close</a>
+               <a class="close" data-ax-negate="contact-form">Close</a>
                <h3>Interested?</h3>
-               <form id="email-form" novalidate>
-                  <input type="text" class="field noval" name="firstName" id="firstName" placeholder="first name" required/>
-                  <input type="text" class="field noval" name="lastName" id="lastName" placeholder="last name" required/>
-                  <input type="email" class="field" name="email" id="email" placeholder="email" required/>
+               <form id="contact-form" novalidate>
+                  <input type="text" class="field" name="name" id="name" placeholder="name" requried>
+                  <input type="tel" class="field" name="phone" id="phone" placeholder="phone" requried>
+                  <input type="email" class="field" name="email" id="email" placeholder="email" requried>
+                  <select name="move-in" id="move-in">
+                     <option value="not-sure">Not sure</option>
+                  </select>
                   <input type="submit" class="submit" value="SEND"/>
                </form>
                <img src="assets/img/logo-bishops-place-b.svg" alt="Bishops Place" class="logo"/>
