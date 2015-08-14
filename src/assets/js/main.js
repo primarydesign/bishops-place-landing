@@ -29,66 +29,45 @@ ax.negate('contact-form', 'click', function(){
 });
 
 
-var today, regex = {}, fields = {}, check = {},
-val = $('.field:not(.noval)'),
-req = $('.field[required]'),
-noval = $('.filed.noval'),
-noreq = $('.filed:not([required])'),
-submit = $('.submit[type="submit"]');
 
-regex['email'] = /[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/;
-regex['tel'] = /^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/;
-
-fields.email = $('.field[type="email"]');
-fields.phone = $('.field[type="tel"]');
-fields.movein = $('.field[name="movein"]');
-
-check['email'] = function(input) {
-   if (input.search(regex['email']) === 0) return true;
-   else return false;
-};
-check['tel'] = function(input) {
-   if (input.search(regex['tel']) === 0) return true;
-   else return false;
-};
+// var today, regex = {}, fields = {}, check = {},
+// val = $('.field:not(.noval)'),
+// req = $('.field[required]'),
+// noval = $('.filed.noval'),
+// noreq = $('.filed:not([required])'),
+// submit = $('.submit[type="submit"]');
+//
+// regex['email'] = /[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/;
+// regex['tel'] = /^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/;
+//
+// fields.email = $('.field[type="email"]');
+// fields.phone = $('.field[type="tel"]');
+// fields.movein = $('.field[name="movein"]');
 
 /* populate move-in options */
 (function(){
-   var options, option, today, months, month, i = 0;
-   months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-   options = document.createDocumentFragment();
-   today = new Date();
+   var $movein = $('.field[name="movein"]');
+   var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+   var optionsFragment = document.createDocumentFragment();
+   var month = (new Date()).getMonth();
+   var option, m, i = 0;
 
-   for (var i=0; i < 12; i++) {
-      month = today.getMonth() + i;
-      if (month > 11) month -= 12;
+   for (; i < 12; i++) {
+      m = month + i;
+      if (m > 11) m -= 12;
       option = document.createElement('option');
-      option.setAttribute('value', months[month]);
-      option.textContent = months[month];
-      options.appendChild(option);
+      option.setAttribute('value', months[m]);
+      option.textContent = months[m];
+      optionsFragment.appendChild(option);
    }
-   fields.movein.append(options);
+
+   $movein.append(optionsFragment);
 })();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* disable form submission */
+(function(){
+   submit.attr('disabled', 'disabled');
+});
 
 var regex = {}, fields = {}, errors = {};
 
@@ -106,11 +85,17 @@ fields.submit = $('input[type="submit"].submit');
 
 
 
-
-
-
-
-
+/**********************************/
+/* FORM VALIDATION AND SUBMISSION */
+/**********************************/
+var select = {}, states = {};
+req = '.field[required]';
+val = '.field:not(.noval)';
+noreq = '.field:not([required])';
+noval = '.field.noval';
+valid = '.valid';
+invalid = '.invalid';
+touched = '.invalid';
 
 fields.required.focusout(function () {
    if ($(this).val() !== "") {
@@ -181,22 +166,37 @@ fields.field.mouseleave(function(){
    enableSubmit();
 });
 
+$('.submit').on('click', function(){
+
+});
 $('#contact-form').on('submit', function (e) {
    e.preventDefault();
-   $.ajax({
-      type: 'POST',
-      url: 'submit.php',
-      data: $(this).serialize(),
-      beforeSend: function () {
-         $('.submit').attr('disabled', '').val('SENDING...');
-      },
-      success: function () {
-         $('.submit').val('THANK YOU');
-      },
-      error: function () {
-         $('.submit').removeAttr('disabled');
-      }
+
+   var clearance = 0;
+
+   // all required fields are filled
+   $('.field[required]').each(function() {
+      if ($(this).val() === "") ++clearance;
    });
+
+   // all validate fields are valid
+
+   if (clerance === 0) {
+      $.ajax({
+         type: 'POST',
+         url: 'submit.php',
+         data: $(this).serialize(),
+         beforeSend: function () {
+            $('.submit').attr('disabled', '').val('SENDING...');
+         },
+         success: function () {
+            $('.submit').val('THANK YOU');
+         },
+         error: function () {
+            $('.submit').removeAttr('disabled');
+         }
+      });
+   }
 });
 
 
