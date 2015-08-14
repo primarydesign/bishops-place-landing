@@ -1,15 +1,15 @@
 {
-  "name": "bishops-place",
+  "name": "bishops-place-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Bishops Place landing page by Primary Design, Inc.",
+  "description": "Bishops Place landing page, by Primary Design, Inc.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "?.git"
+    "url": "https://github.com/primarydesign/bishops-place-landing.git"
   },
   "author": "Primary Design, Inc.",
   "license": "ISC",
