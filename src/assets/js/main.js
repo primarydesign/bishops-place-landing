@@ -128,7 +128,8 @@ ax.negate('contact-form', 'click', function(){
          url: 'submit.php',
          data: $(this).serialize(),
          success: function () {
-            $('.submit').val('THANK YOU');
+            $('#contact-form').delay(300).hide()
+            .siblings('#submission-response').addClass('active');
          },
          error: function () {
             $('.submit').removeAttr('disabled');
