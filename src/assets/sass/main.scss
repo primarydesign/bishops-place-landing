@@ -122,6 +122,7 @@ body {
 }
 #learn-more {// 775,190
    @include aspect-ratio(775,190);
+   display: none;
    background-color: $colors-theme-blue;
    a {
       color: #ffffff;
@@ -132,7 +133,27 @@ body {
       position: absolute;
       left: 10%;
    }
+   @media (min-width:$mobile-min-width) {
+      display: block;
+   }
 }
+#learn-more-mobile {// 775,190
+   @include aspect-ratio(775,190);
+   background-color: $colors-theme-blue;
+   a {
+      color: #ffffff;
+      font: $font-stack;
+      font-size: 1.5em;
+      letter-spacing: 1px;
+      bottom: 12%;
+      position: absolute;
+      right: 10%;
+   }
+   @media (min-width:$mobile-min-width) {
+      display: none;
+   }
+}
+
 .form-constraint {
    @media (min-width:$mobile-min-width) {
       margin-bottom: 1px !important;
