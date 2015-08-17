@@ -28,23 +28,6 @@ ax.negate('contact-form', 'click', function(){
    this.css('display','none');
 });
 
-
-
-// var today, regex = {}, fields = {}, check = {},
-// val = $('.field:not(.noval)'),
-// req = $('.field[required]'),
-// noval = $('.filed.noval'),
-// noreq = $('.filed:not([required])'),
-// submit = $('.submit[type="submit"]');
-//
-// regex['email'] = /[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/;
-// regex['tel'] = /^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/;
-//
-// fields.email = $('.field[type="email"]');
-// fields.phone = $('.field[type="tel"]');
-// fields.movein = $('.field[name="movein"]');
-
-/* populate move-in options */
 (function(){
    var $movein = $('.field[name="movein"]');
    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -64,131 +47,86 @@ ax.negate('contact-form', 'click', function(){
    $movein.append(optionsFragment);
 })();
 
-/* disable form submission */
-(function(){
-   submit.attr('disabled', 'disabled');
-});
-
-var regex = {}, fields = {}, errors = {};
-
-regex.email = /[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/;
-regex.tel = /^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/;
-
-fields.field = $('.field');
-fields.email = $('input[type="email"]').not('.noval');
-fields.phone = $('input[type="tel"]').not('.noval');
-fields.movein = $('select#move-in');
-fields.novalidate = $('.field.noval');
-fields.required = $('.field[required]');
-fields.notreq = $('.field').not('[required]');
-fields.submit = $('input[type="submit"].submit');
-
-
-
 /**********************************/
 /* FORM VALIDATION AND SUBMISSION */
 /**********************************/
-var select = {}, states = {};
-req = '.field[required]';
-val = '.field:not(.noval)';
-noreq = '.field:not([required])';
-noval = '.field.noval';
-valid = '.valid';
-invalid = '.invalid';
-touched = '.invalid';
+(function(){
+   var criteria = {};
+   criteria['email'] = function(value) {
+      return (value.search(/[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/) === 0);
+   }
+   criteria['tel'] = function(value) {
+      return (value.search(/^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/) === 0);
+   }
 
-fields.required.focusout(function () {
-   if ($(this).val() !== "") {
-      if ($(this).hasClass('noval')) {
-         $(this).addClass('valid').removeClass('invalid');
-      } else {
-         var $id = $(this).attr('type');
+   var validate = function(input) {
+      var value = input.val() || "";
+      var clearance = 0;
+      var c;
 
-         if ($(this).val().search(regex[$id]) === 0) {
-            $(this).addClass('valid').removeClass('invalid');
+      /* clean input value */
+      value = value.trim();
+
+      /* run value through validation */
+      if (value === "") {
+         if (input.is('[required]')) {
+            input.removeClass('valid').addClass('invalid');
+            ++clearance;
          } else {
-            $(this).addClass('invalid').removeClass('valid');
+            input.removeClass('invalid');
+         }
+      } else {
+         if (input.is('.noval')) {
+            input.removeClass('invalid');
+            if (input.is('[required]')) {
+               input.addClass('valid');
+            }
+         } else {
+            for (c in criteria) {
+               if (input.attr('type') === c || input.hasClass(c)) {
+                  if (!criteria[c](value)) ++clearance;
+               }
+            }
+            if (clearance === 0) {
+               input.removeClass('invalid').addClass('valid');
+            } else {
+               input.removeClass('valid').addClass('invalid');
+            }
          }
       }
-   } else {
-      $(this).addClass('invalid').removeClass('valid');
-   }
-});
 
-fields.notreq.focusout(function () {
-   if ($(this).val().length === 0) {
-      $(this).removeClass('invalid');
-   }
-});
+      /* return validation results */
+      return clearance;
 
-fields.email.focusout(function () {
-	if ($(this).val().search(regex.email) === 0) {
-		$(this).addClass('valid').removeClass('invalid');
-	} else {
-		$(this).addClass('invalid').removeClass('valid');
-	}
-});
+   };
 
-function enableSubmit() {
-   var $reqs = $('[required]'),
-      $vals = $('.field:not(.noval)'),
-      $reqsValid = $('[required].valid'),
-      $valsNotInvalid = $('.field:not(.noval):not(.invalid)'),
-      clearance = 0;
-
-   if ($reqs.length !== $reqsValid.length) { clearance += 1; }
-   if ($vals.length !== $valsNotInvalid.length) { clearance += 1; }
-
-   if (clearance === 0) {
-      $('.submit').removeAttr('disabled');
-   } else {
-      $('.submit').attr('disabled', '');
-   }
-}
-
-$('.submit').mouseenter(function () {
-   var $reqs = $('[required]'),
-      $vals = $('.field:not(.noval)'),
-      $reqsValid = $('[required].valid'),
-      $valsNotInvalid = $('.field:not(.noval):not(.invalid)'),
-      clearance = 0;
-
-   if ($reqs.length !== $reqsValid.length) { clearance += 1; }
-   if ($vals.length !== $valsNotInvalid.length) { clearance += 1; }
-
-   if (clearance === 0) {
-      $(this).removeAttr('disabled');
-   } else {
-      $(this).attr('disabled', '');
-   }
-});
-fields.field.mouseleave(function(){
-   enableSubmit();
-});
-
-$('.submit').on('click', function(){
-
-});
-$('#contact-form').on('submit', function (e) {
-   e.preventDefault();
-
-   var clearance = 0;
-
-   // all required fields are filled
-   $('.field[required]').each(function() {
-      if ($(this).val() === "") ++clearance;
+   $('.field').on('focusout', function(){
+      validate($(this));
    });
 
-   // all validate fields are valid
+   $('.submit').on('click', function (event){
+      event.preventDefault();
 
-   if (clerance === 0) {
+      var clearance = 0;
+
+      $('.field').each(function(){
+         clearance += validate($(this));
+      });
+
+      if (clearance === 0) {
+         $(this).closest('form').submit();
+      }
+
+   });
+
+   $('#contact-form').on('submit', function (event) {
+      event.preventDefault();
+      $('.submit').prop('disabled',true).val("SENDING");
+
       $.ajax({
          type: 'POST',
          url: 'submit.php',
          data: $(this).serialize(),
-         beforeSend: function () {
-            $('.submit').attr('disabled', '').val('SENDING...');
-         },
          success: function () {
             $('.submit').val('THANK YOU');
          },
@@ -196,9 +134,8 @@ $('#contact-form').on('submit', function (e) {
             $('.submit').removeAttr('disabled');
          }
       });
-   }
-});
+   });
+})();
 
 
-
-});
+}); //DOCUMENT::END
