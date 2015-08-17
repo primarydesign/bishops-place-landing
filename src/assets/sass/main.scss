@@ -47,11 +47,15 @@ body {
    &box {
       display: block;
       margin: $gutter-width 0;
+      max-width: 100vw;
       overflow: hidden;
       position: relative;
       background-color: #ffffff;
       font-size: 1rem;
       width: 100%;
+      @media (min-width: $mobile-min-width) {
+         height: auto !important;
+      }
    }
    &full {
       clear: both;
@@ -69,6 +73,7 @@ body {
 
 #identity { // 1115,815
    @include aspect-ratio(1115,815);
+   height: 80vh;
    background-image: url('../img/man-smiling-dog.jpg');
    background-position: center 80%;
    background-repeat: no-repeat;
@@ -81,10 +86,10 @@ body {
       top: 8%;left: 50%;
       transform: translateX(-50%);
    }
-   @media (min-width: $mobile-min-width) {}
 }
 #kitchen-sketch {// 400,350
    @include aspect-ratio(168.78,140.75);
+   height: 220px;
    background-image: url('../img/render-interior-kitchen.jpg');
    background-position: center center;
    background-repeat: no-repeat;
@@ -97,6 +102,7 @@ body {
 }
 #outside-sketch {// 670,350
    @include aspect-ratio(303.546,140.75);
+   height: 220px;
    background-image: url('../img/render-exterior-sketch.jpg');
    background-position: center center;
    background-repeat: no-repeat;
@@ -112,14 +118,11 @@ body {
    a {
       color: #ffffff;
       font: $font-stack;
-      font-size: 1.2em;
+      font-size: 1.5em;
       letter-spacing: 1px;
       bottom: 12%;
       position: absolute;
       left: 10%;
-   }
-   @media (min-width:$mobile-min-width) {
-
    }
 }
 .form-constraint {
@@ -129,6 +132,7 @@ body {
 }
 #grand-b {// 775,960
    @include aspect-ratio(333.594,410.8597);
+   height: 80vh;
    background-image: url('../img/sunset-couple.jpg');
    background-position: center 30%;
    background-repeat: no-repeat;
@@ -144,27 +148,32 @@ body {
       }
    }
 }
-#tagline {// 1930,550
-   @include aspect-ratio(1930,350);
+#tagline {
+   padding: 10% 0;
    background-image: url('../img/tile-bishops-b.gif');
    background-repeat: repeat;
-   background-size: 40px;
+   background-size: 11%;
+   text-align: left;
    .tagline {
       color:#ffffff;
       font: $font-stack;
       font-size: 2em;
-      display: block;
-      position: absolute;
-      top: 20%;left: 5%;
+      display: inline-block;
       line-height: 1.3em;
+      margin-left: 6%;
       text-align: left;
    }
    @media (min-width: $mobile-min-width) {
+      padding: 4% 0 12%;
+      background-size: 7.5%;
       .tagline {font-size: 2.8em;}
+   }
+   @media (min-width: 1100px) {
+      background-size: 75px;
    }
 }
 #footer {// 1930,500
-   padding: 400px 5% 40px;
+   padding: 50px 5% 40px;
    background-color: $colors-theme-gray;
    text-align: center;
    h3, .contact, .legal {
@@ -265,17 +274,20 @@ body {
    width: 100%;
    background-image: url('../img/tile-bishops-b.gif');
    background-repeat: repeat;
-   background-size: 40px;
+   background-size: 50px;
    font-size: 1rem;
    .inner {
       box-sizing: border-box;
       height: 100%;
       overflow: hidden;
-      padding: 5% 5% 11%;
+      padding: 10% 5% 11%;
       position: relative;
       width: 100%;
       background: #ffffff;
       text-align: center;
+      @media (min-width: $mobile-min-width) {
+         padding-top: 5%;
+      }
    }
    .close {
       color: $colors-theme-gray;
@@ -306,13 +318,19 @@ body {
       position: absolute;
       bottom: 0; left: 50%;
       transform: translate(-50%, 40%);
-      width: 25%;
+      width: 35%;
+      @media (min-width: $mobile-min-width) {
+         width: 25%;
+      }
    }
    @media (min-width: $mobile-min-width) {
       position: fixed;
-      top: 40%; left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%,-50%);
       width: 650px;
       z-index: 10;
+      @media (min-height: 700px) {
+         top: 40%;
+      }
    }
 }
