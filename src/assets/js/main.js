@@ -22,10 +22,18 @@ ax.negate = function($id, $events, $callback) {
 }
 
 ax.activate('contact-form', 'click', function(){
-   this.css('display','block');
+   var self = this;
+   self.css('display','block');
+   setTimeout(function(){
+      self.css('opacity','1');
+   },1);
 });
 ax.negate('contact-form', 'click', function(){
-   this.css('display','none');
+   var self = this;
+   this.css('opacity','0');
+   setTimeout(function(){
+      self.hide();
+   },300);
 });
 
 (function(){
