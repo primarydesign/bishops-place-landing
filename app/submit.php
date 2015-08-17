@@ -2,13 +2,14 @@
 
 if (isset($_POST)) {
 
-	$fname = $_POST['firstName'];
-	$lname = $_POST['lastName'];
+	$name = $_POST['name'];
+	$phone = $_POST['phone'];
 	$email = $_POST['email'];
+	$month = $_POST['movein'];
 	$clearance = 0;
 
 	//Validate Requireds
-	$reqs = Array($fname, $lname, $email);
+	$reqs = Array($name, $phone, $email);
 	foreach( $reqs as $r ) {
 		$clearance += (required($r)) ? 0 : 1;}
 	//Validate Email
@@ -25,9 +26,11 @@ if (isset($_POST)) {
 
 		$address = "mitchell@primarydesign.com";
 		$subject = "User Email Submission";
-		$message = "Visitor contact information:";
-		$message += "Name: " . $fname . $lname . "\n";
-		$message += "Email: " . $email . "\n";
+		$message = "Visitor contact information:\n";
+		$message .= "Name: " . $name . "\n";
+		$message .= "Phone: " . $phone . "\n";
+		$message .= "Email: " . $email . "\n";
+		$message .= "Move-In: " . $month . "\n";
 
 		if( mail($address, $subject, $message) ) {
 			echo "success:\n$address\n$subject\n$message";
