@@ -237,7 +237,7 @@ body {
    }
 }
 #contact-form {
-   margin-bottom: 15px;
+   margin-bottom: 35px;
    text-align: right;
    input, textarea {
       color: $colors-theme-gray;
@@ -352,15 +352,13 @@ body {
    .logo {
       position: absolute;
       bottom: 0; left: 50%;
-      margin-bottom: -13px;
-      min-width: 160px;
+      //margin-bottom: -13px;
       transform: translate(-50%, -45px);
       height: 80px;
-      width: 33%;
-      background-image: url('../img/logo-bishops-place.svg');
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      svg {
+         max-height: 100%;
+         max-width: 100%;
+      }
       @media (min-width: $mobile-min-width) {
          bottom: 0%;
          margin-bottom: -8px;
