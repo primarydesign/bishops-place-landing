@@ -90,7 +90,6 @@ body {
    .vertical-text {
       display: none;
       height: 110%;
-      opacity: .9;
       position: absolute;
       top: 50%; right: 0;
       transform: translate(0.1%,-50%);
@@ -173,7 +172,7 @@ body {
    .letter {
       height: 90%;
       position: absolute;
-      top:-1px;left:-1px;
+      top:-2px;left:-1px;
    }
    @media (min-width: $mobile-min-width) {
       .letter {
@@ -206,7 +205,7 @@ body {
    }
 }
 #footer {// 1930,500
-   padding: 50px 5% 40px;
+   padding: 50px 5% 20px;
    background-color: $colors-theme-gray;
    text-align: center;
    h3, .contact, .legal {
@@ -216,7 +215,7 @@ body {
    }
    h3 {
       font-size: 1em;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       line-height: .5em;
    }
    .contact {
@@ -224,12 +223,13 @@ body {
       li {
          display: inline-block;
          font-size: .75em;
-         letter-spacing: 0.5px;
+         letter-spacing: 1px;
          opacity: .8;
       }
    }
    .legal {
       font-size: .65em;
+      letter-spacing: 0.6px;
       opacity: .7;
    }
    @media (min-width: $mobile-min-width) {
@@ -237,7 +237,7 @@ body {
    }
 }
 #contact-form {
-   margin: 0 0 20px;
+   margin-bottom: 15px;
    text-align: right;
    input, textarea {
       color: $colors-theme-gray;
@@ -315,7 +315,7 @@ body {
       box-sizing: border-box;
       height: 100%;
       overflow: hidden;
-      padding: 10% 5% 11%;
+      padding: 10% 5% 110px;
       position: relative;
       width: 100%;
       background: #ffffff;
@@ -330,7 +330,7 @@ body {
       font-size: .8em;
       text-transform: uppercase;
       display: block;
-      padding: 7px 7px;
+      padding: 12px 12px;
       position: absolute;
       top:0;right:0;
       &:hover {
@@ -351,9 +351,10 @@ body {
    }
    .logo {
       position: absolute;
-      bottom: 5%; left: 50%;
+      bottom: 0; left: 50%;
+      margin-bottom: -13px;
       min-width: 160px;
-      transform: translate(-50%, 0%);
+      transform: translate(-50%, -45px);
       height: 70px;
       width: 25%;
       background-image: url('../img/logo-bishops-place.svg');
@@ -361,7 +362,8 @@ body {
       background-repeat: no-repeat;
       background-size: cover;
       @media (min-width: $mobile-min-width) {
-         bottom: 7%;
+         bottom: 0%;
+         margin-bottom: -8px;
          width: 30%;
       }
    }
