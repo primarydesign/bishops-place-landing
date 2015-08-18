@@ -169,7 +169,7 @@ body {
    .letter {
       height: 90%;
       position: absolute;
-      top:0;left:-1px;
+      top:-1px;left:-1px;
    }
    @media (min-width: $mobile-min-width) {
       .letter {
