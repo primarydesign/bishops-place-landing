@@ -88,11 +88,15 @@ body {
       z-index: 2;
    }
    .vertical-text {
+      display: none;
       height: 110%;
       opacity: .9;
       position: absolute;
       top: 50%; right: 0;
       transform: translate(0.1%,-50%);
+      @media (min-width: $mobile-min-width) {
+         display: block;
+      }
    }
 }
 #kitchen-sketch {// 400,350
