@@ -24,7 +24,7 @@ if (isset($_POST)) {
 	} else {
 	/* submission clear */
 
-		$address = "mitchell@primarydesign.com";
+		$address = "contact@liveatbishopsplace.com";
 		$subject = "User Email Submission";
 		$message = "Visitor contact information:\n";
 		$message .= "Name: " . $name . "\n";
