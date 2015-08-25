@@ -20,11 +20,13 @@ if (isset($_POST)) {
 	/* submission invalidation */
 
 		/* error-handling */
+		echo "failure:validation";
 
 	} else {
 	/* submission clear */
 
-		$address = "contact@liveatbishopsplace.com";
+		// $address = "contact@liveatbishopsplace.com";
+		$address = "mitchell@primarydesign.com";
 		$subject = "User Email Submission";
 		$message = "Visitor contact information:\n";
 		$message .= "Name: " . $name . "\n";
@@ -33,9 +35,9 @@ if (isset($_POST)) {
 		$message .= "Move-In: " . $month . "\n";
 
 		if( mail($address, $subject, $message) ) {
-			echo "success:\n$address\n$subject\n$message";
+			echo "success";
 		} else {
-			echo "failure:\n$address\n$subject\n$message";
+			echo "failure:mailing";
 		}
 
 	}/**(submission)**/

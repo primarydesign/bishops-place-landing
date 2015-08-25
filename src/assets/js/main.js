@@ -135,7 +135,7 @@ ax.negate('contact-form', 'click', function(){
          type: 'POST',
          url: 'submit.php',
          data: $(this).serialize(),
-         success: function () {
+         success: function (data) {
             $('#contact-form').delay(300).hide()
             .siblings('#submission-response').addClass('active');
          },
