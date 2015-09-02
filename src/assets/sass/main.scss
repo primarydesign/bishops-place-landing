@@ -75,7 +75,7 @@ body {
    @include aspect-ratio(1115,815);
    height: 80vh;
    background-image: url('../img/man-relaxing.jpg');
-   background-position: 60% center;
+   background-position: 60% 100%;
    background-repeat: no-repeat;
    background-size: cover;
    margin-left: 0;
@@ -83,7 +83,7 @@ body {
    .logo {
       height: 30%;
       position: absolute;
-      top: 8%;left: 50%;
+      top: 6%;left: 50%;
       transform: translateX(-50%);
       z-index: 2;
    }
@@ -97,16 +97,16 @@ body {
          display: block;
       }
    }
-   @media (min-width: 430px) {
-     background-position: 70% center;
-     background-size: 180%;
+   @media (min-width: 500px) {
+     background-position: 70% 30%;
+     background-size: cover;
    }
    @media (min-width: 641px) {
-      background-position: 80%;
+      background-position: 80% 31%;
       background-size: cover;
    }
    @media (min-width: $mobile-min-width), (orientation:landscape) {
-      background-position: 70% 35%;
+      background-position: 70% 25%;
       background-size: 155%;
    }
 }
