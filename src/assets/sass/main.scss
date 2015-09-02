@@ -75,7 +75,7 @@ body {
    @include aspect-ratio(1115,815);
    height: 80vh;
    background-image: url('../img/man-relaxing.jpg');
-   background-position: center;
+   background-position: 60% center;
    background-repeat: no-repeat;
    background-size: cover;
    margin-left: 0;
@@ -97,13 +97,17 @@ body {
          display: block;
       }
    }
-   @media (min-width: 600px) {
+   @media (min-width: 430px) {
+     background-position: 70% center;
+     background-size: 180%;
+   }
+   @media (min-width: 641px) {
       background-position: 80%;
       background-size: cover;
    }
    @media (min-width: $mobile-min-width), (orientation:landscape) {
-      background-position: right;
-      background-size: 140%;
+      background-position: 70% 35%;
+      background-size: 155%;
    }
 }
 #kitchen-sketch {// 400,350
