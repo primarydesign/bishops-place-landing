@@ -74,8 +74,8 @@ body {
 #identity { // 1115,815
    @include aspect-ratio(1115,815);
    height: 80vh;
-   background-image: url('../img/man-smiling-dog.jpg');
-   background-position: center 80%;
+   background-image: url('../img/man-relaxing.jpg');
+   background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
    margin-left: 0;
@@ -96,6 +96,14 @@ body {
       @media (min-width: $mobile-min-width) {
          display: block;
       }
+   }
+   @media (min-width: 600px) {
+      background-position: 80%;
+      background-size: cover;
+   }
+   @media (min-width: $mobile-min-width), (orientation:landscape) {
+      background-position: right;
+      background-size: 140%;
    }
 }
 #kitchen-sketch {// 400,350
