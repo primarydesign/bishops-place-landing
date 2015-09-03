@@ -40,12 +40,16 @@ ax.negate('contact-form', 'click', function(){
    var $movein = $('.field[name="movein"]');
    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
    var optionsFragment = document.createDocumentFragment();
-   var month = (new Date()).getMonth();
+   var today = new Date();
+   var month = today.getMonth();
    var option, m, i = 0;
 
    for (; i < 12; i++) {
-      m = month + i;
+      m = (today.getFullYear() < 2016)
+        ? i
+        : i + month;
       if (m > 11) m -= 12;
+      console.log(months[m]);
       option = document.createElement('option');
       option.setAttribute('value', months[m]);
       option.textContent = months[m];
