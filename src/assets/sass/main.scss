@@ -336,7 +336,7 @@ body {
 }
 
 #contact-form {
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   text-align: right;
 
   input,
@@ -374,6 +374,7 @@ body {
     }
   }
   #comments {
+    clear: both;
     display: block;
     width: 100%;
     text-align: left;
@@ -395,17 +396,25 @@ body {
       resize: none;
     }
   }
+  #movein {
+    @media (min-width: $mobile-min-width) {
+      display: inline-block;
+      float: left;
+      width: 160px;
+    }
+  }
   #apt-type {
-    height: 20px;
+    display: block;
     padding-bottom: 20px;
     border: none;
     text-align: left;
     label {
-      display: inline-block;
-      height: 100%;
-      line-height: 20px;
+      display: block;
+      height: 35px;
+      line-height: 35px;
       margin-right: 20px;
       vertical-align: middle;
+      text-align: left;
     }
     .label {
       display: inline-block;
@@ -416,17 +425,29 @@ body {
       font-size: 0.8em;
       font-weight: 400;
       letter-spacing: 0.75px;
-      line-height: 20px;
+      line-height: 35px;
     }
     .field {
       display: inline-block;
       height: 100%;
-      margin: 0 2px 0 0;
+      margin: 0 5px 0 1px;
       padding: 0;
       vertical-align: middle;
       width: auto;
     }
+    @media(min-width: 450px) {
+      height: auto;
+      label {
+        display: inline-block;
+      }
+    }
+    @media (min-width: $mobile-min-width) {
+      display: inline-block;
+      float: right;
+      padding: 0;
+    }
   }
+
 
   .submit {
     box-sizing: border-box;
@@ -479,9 +500,9 @@ body {
 
   .inner {
     box-sizing: border-box;
-    height: 100%;
-    overflow: hidden;
-    padding: 10% 5% 125px;
+    height: auto;
+    overflow: auto;
+    padding: 10% 5% 30px;
     position: relative;
     width: 100%;
     background: #fff;
@@ -489,6 +510,9 @@ body {
 
     @media (min-width: $mobile-min-width) {
       padding-top: 5%;
+    }
+    @media (min-width: 800px) and (orientation:landscape) {
+      max-height: 90vh;
     }
   }
 
@@ -522,13 +546,9 @@ body {
   }
 
   .logo {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-
-    //margin-bottom: -13px;
-    transform: translate(-50%, -45px);
-    height: 80px;
+    display: block;
+    position: relative;
+    height: 75px;
 
     svg {
       max-height: 100%;
@@ -550,7 +570,7 @@ body {
     z-index: 10;
 
     @media (min-height: 700px) {
-      top: 40%;
+      top: 50%;
     }
   }
 }
