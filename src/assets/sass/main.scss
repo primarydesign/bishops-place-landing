@@ -133,6 +133,7 @@ body {
   .vertical-text {
     display: none;
     height: 110%;
+    margin-right: -4px;
     position: absolute;
     top: 50%;
     right: 0;
@@ -364,8 +365,9 @@ body {
     }
 
     &::placeholder {
-      color: $colors-theme-gray;
-      font-weight: 300;
+      color: #7A7A7A;
+      opacity: 1;
+      font-weight: 400;
     }
 
     &.invalid {
