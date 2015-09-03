@@ -6,14 +6,17 @@ if (isset($_POST)) {
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	$month = $_POST['movein'];
+	$atype = $_POST['apt-type'];
 	$clearance = 0;
 
 	//Validate Requireds
-	$reqs = Array($name, $phone, $email);
+	$reqs = Array($name, $phone, $email, $atype);
 	foreach( $reqs as $r ) {
 		$clearance += (required($r)) ? 0 : 1;}
 	//Validate Email
 	$clearance += (email($email)) ? 0 : 1;
+
+	if ($month == "") $month = "Not Sure";
 
 	//Check Validation & Send Email
 	if ($clearance !== 0) {
@@ -32,6 +35,7 @@ if (isset($_POST)) {
 		$message .= "Name: " . $name . "\n";
 		$message .= "Phone: " . $phone . "\n";
 		$message .= "Email: " . $email . "\n";
+		$message .= "Type: " . $atype . "\n";
 		$message .= "Move-In: " . $month . "\n";
 
 		if( mail($address, $subject, $message) ) {
