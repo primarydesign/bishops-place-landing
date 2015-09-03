@@ -7,6 +7,7 @@ if (isset($_POST)) {
 	$email = $_POST['email'];
 	$month = $_POST['movein'];
 	$atype = $_POST['apt-type'];
+	$cmnts = $_POST['comments'];
 	$clearance = 0;
 
 	//Validate Requireds
@@ -37,6 +38,7 @@ if (isset($_POST)) {
 		$message .= "Email: " . $email . "\n";
 		$message .= "Type: " . $atype . "\n";
 		$message .= "Move-In: " . $month . "\n";
+		$message .= "Comments:\n" . $cmnts . "\n";
 
 		if( mail($address, $subject, $message) ) {
 			echo "success";

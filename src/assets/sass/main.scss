@@ -373,7 +373,28 @@ body {
       color: red;
     }
   }
-
+  #comments {
+    display: block;
+    width: 100%;
+    text-align: left;
+    span {
+      color: $colors-theme-blue;
+      font: $font-stack;
+      font-size: 1.4em;
+      font-weight: 600;
+      letter-spacing: 0.75px;
+      line-height: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    textarea {
+      max-height: 100px;
+      max-width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      resize: none;
+    }
+  }
   #apt-type {
     height: 20px;
     padding-bottom: 20px;
@@ -418,6 +439,7 @@ body {
     color: #fff;
     cursor: pointer;
     font-size: 0.7em;
+    font-weight: 600;
     letter-spacing: 1px;
     outline: none;
   }
