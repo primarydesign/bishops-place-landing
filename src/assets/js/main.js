@@ -35,6 +35,14 @@ ax.negate('contact-form', 'click', function(){
       self.hide();
    },300);
 });
+$('a.checkbox').on('click', function() {
+  var checkbox = $(this).siblings('input[type="checkbox"]');
+  if (Boolean(checkbox.attr('checked'))) {
+    checkbox.removeAttr('checked');
+  } else {
+    checkbox.attr('checked', 'checked');
+  }
+});
 
 (function(){
    var $movein = $('.field[name="movein"]');
@@ -49,7 +57,6 @@ ax.negate('contact-form', 'click', function(){
         ? i
         : i + month;
       if (m > 11) m -= 12;
-      console.log(months[m]);
       option = document.createElement('option');
       option.setAttribute('value', months[m]);
       option.textContent = months[m];
@@ -69,6 +76,17 @@ ax.negate('contact-form', 'click', function(){
    }
    criteria['tel'] = function(value) {
       return (value.search(/^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/) === 0);
+   }
+
+   var checkbox = function() {
+     var checks = $('[name="apt-type"]');
+     var checked = 0, clearance = 0;
+
+     checks.each(function() {
+       if (Boolean($(this).attr('checked'))) checked = 1;
+     });
+
+    
    }
 
    var validate = function(input) {
@@ -111,6 +129,9 @@ ax.negate('contact-form', 'click', function(){
       return clearance;
 
    };
+   $('[name="apt-type"] ~ .checkbox').on('click', function() {
+      checkbox();
+   });
 
    $('.field').on('focusout', function(){
       validate($(this));
@@ -120,6 +141,8 @@ ax.negate('contact-form', 'click', function(){
       event.preventDefault();
 
       var clearance = 0;
+
+      clearance += checkbox();
 
       $('.field').each(function(){
          clearance += validate($(this));
