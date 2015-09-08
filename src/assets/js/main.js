@@ -164,14 +164,11 @@ $('a.checkbox').on('click', function() {
       event.preventDefault();
 
       var clearance = 0;
-      console.log(clearance);
 
       clearance += valCheckbox('apttype[]');
-      console.log(clearance);
       $('.field').each(function(){
          clearance += validate($(this));
       });
-      console.log(clearance);
       if (clearance === 0) {
          $(this).closest('form').submit();
       }
@@ -187,7 +184,7 @@ $('a.checkbox').on('click', function() {
          url: 'submit.php',
          data: serialize($(this)),
          success: function (data) {
-            console.log(data);
+            // console.log(data);
             $('#contact-form').delay(300).hide()
             .siblings('#submission-response').addClass('active');
          },
