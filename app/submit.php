@@ -6,9 +6,10 @@ if (isset($_POST)) {
 	$phone = $_POST['phone'];
 	$email = $_POST['email'];
 	$month = $_POST['movein'];
-	$atype = $_POST['apt-type'];
+	$atype = $_POST['apttype'];
 	$commt = $_POST['comments'];
 
+	$atype = join(' ', $atype);
 	$clearance = 0;
 
 	//Validate Requireds

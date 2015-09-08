@@ -71,11 +71,26 @@ $('a.checkbox').on('click', function() {
 /**********************************/
 (function(){
    var criteria = {};
+   var dataString = '';
+
    criteria['email'] = function(value) {
       return (value.search(/[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/) === 0);
    }
    criteria['tel'] = function(value) {
       return (value.search(/^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/) === 0);
+   }
+
+   var serialize = function(form) {
+     var query, checked = false, cvals = [],
+     checkboxes = form.find('.field[name="apttype[]"]'),
+     inputs = form.find('.field:not([name="apttype[]"])');
+     checkboxes.each(function() {
+       checked = Boolean($(this).attr('checked'));
+       if (checked) cvals.push($(this).val());
+     });
+     query = inputs.serialize();
+     query += encodeURI("&apttype[]=" + cvals.join(', '));
+     return query;
    }
 
    var valCheckbox = function(name) {
@@ -99,7 +114,7 @@ $('a.checkbox').on('click', function() {
       var clearance = 0;
       var c;
 
-      if (input.attr('type') === 'checkbox') return;
+      if (input.attr('type') === 'checkbox') return 0;
 
       /* clean input value */
       value = value.trim();
@@ -136,8 +151,9 @@ $('a.checkbox').on('click', function() {
       return clearance;
 
    };
-   $('[name="apt-type"] ~ .checkbox').on('click', function() {
-      valCheckbox('apt-type');
+
+   $('[name="apttype[]"] ~ .checkbox').on('click', function() {
+      valCheckbox('apttype[]');
    });
 
    $('.field').on('focusout', function(){
@@ -148,13 +164,14 @@ $('a.checkbox').on('click', function() {
       event.preventDefault();
 
       var clearance = 0;
+      console.log(clearance);
 
-      clearance += valCheckbox('apt-type');
-
+      clearance += valCheckbox('apttype[]');
+      console.log(clearance);
       $('.field').each(function(){
          clearance += validate($(this));
       });
-
+      console.log(clearance);
       if (clearance === 0) {
          $(this).closest('form').submit();
       }
@@ -168,7 +185,7 @@ $('a.checkbox').on('click', function() {
       $.ajax({
          type: 'POST',
          url: 'submit.php',
-         data: $(this).serialize(),
+         data: serialize($(this)),
          success: function (data) {
             console.log(data);
             $('#contact-form').delay(300).hide()
