@@ -78,21 +78,28 @@ $('a.checkbox').on('click', function() {
       return (value.search(/^\(?([0-9]{3})\)?[\-. ]?([0-9]{3})[\-. ]?([0-9]{4})$/) === 0);
    }
 
-   var checkbox = function() {
-     var checks = $('[name="apt-type"]');
-     var checked = 0, clearance = 0;
-
-     checks.each(function() {
-       if (Boolean($(this).attr('checked'))) checked = 1;
+   var valCheckbox = function(name) {
+     var checkboxes = $('[name="'+name+'"]');
+     var checked = false, clearance = 1;
+     checkboxes.each(function() {
+       checked = Boolean($(this).attr('checked'));
+       if (checked) {
+         clearance = 0;
+         return false;
+       }
      });
+     if (clearance === 0) checkboxes.removeClass('invalid').addClass('valid');
+     else checkboxes.removeClass('valid').addClass('invalid');
 
-    
+     return clearance;
    }
 
    var validate = function(input) {
       var value = input.val() || "";
       var clearance = 0;
       var c;
+
+      if (input.attr('type') === 'checkbox') return;
 
       /* clean input value */
       value = value.trim();
@@ -130,7 +137,7 @@ $('a.checkbox').on('click', function() {
 
    };
    $('[name="apt-type"] ~ .checkbox').on('click', function() {
-      checkbox();
+      valCheckbox('apt-type');
    });
 
    $('.field').on('focusout', function(){
@@ -142,7 +149,8 @@ $('a.checkbox').on('click', function() {
 
       var clearance = 0;
 
-      clearance += checkbox();
+      clearance += valCheckbox('apt-type');
+      console.log(clearance);
 
       $('.field').each(function(){
          clearance += validate($(this));
@@ -163,6 +171,7 @@ $('a.checkbox').on('click', function() {
          url: 'submit.php',
          data: $(this).serialize(),
          success: function (data) {
+            console.log(data);
             $('#contact-form').delay(300).hide()
             .siblings('#submission-response').addClass('active');
          },

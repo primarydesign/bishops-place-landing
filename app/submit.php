@@ -8,6 +8,7 @@ if (isset($_POST)) {
 	$month = $_POST['movein'];
 	$atype = $_POST['apt-type'];
 	$cmnts = $_POST['comments'];
+
 	$clearance = 0;
 
 	//Validate Requireds

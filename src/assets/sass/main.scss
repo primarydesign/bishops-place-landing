@@ -443,6 +443,12 @@ body {
       border: 3px solid #ffffff;
       border-radius: 50px;
     }
+    input.invalid ~ .checkbox {
+      border-color: red;
+      &::before {
+        background-color: red;
+      }
+    }
     .label {
       display: inline-block;
       height: 100%;
