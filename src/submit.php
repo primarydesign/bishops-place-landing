@@ -7,10 +7,10 @@ if (isset($_POST)) {
 	$email = $_POST['email'];
 	$month = $_POST['movein'];
 	$atype = $_POST['apt-type'];
-	$cmnts = $_POST['comments'];
+	$commt = $_POST['comments'];
 
 	$clearance = 0;
-	echo $atype;
+
 	//Validate Requireds
 	$reqs = Array($name, $phone, $email, $atype);
 	foreach( $reqs as $r ) {
@@ -39,10 +39,10 @@ if (isset($_POST)) {
 		$message .= "Email: " . $email . "\n";
 		$message .= "Type: " . $atype . "\n";
 		$message .= "Move-In: " . $month . "\n";
-		$message .= "Comments:\n" . $cmnts . "\n";
+		$message .= "Comments:\n" . $commt . "\n";
 
 		if( mail($address, $subject, $message) ) {
-			echo "success" . $atype;
+			echo "success";
 		} else {
 			echo "failure:mailing";
 		}

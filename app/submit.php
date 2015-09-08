@@ -7,7 +7,7 @@ if (isset($_POST)) {
 	$email = $_POST['email'];
 	$month = $_POST['movein'];
 	$atype = $_POST['apt-type'];
-	$cmnts = $_POST['comments'];
+	$commt = $_POST['comments'];
 
 	$clearance = 0;
 
@@ -39,7 +39,7 @@ if (isset($_POST)) {
 		$message .= "Email: " . $email . "\n";
 		$message .= "Type: " . $atype . "\n";
 		$message .= "Move-In: " . $month . "\n";
-		$message .= "Comments:\n" . $cmnts . "\n";
+		$message .= "Comments:\n" . $commt . "\n";
 
 		if( mail($address, $subject, $message) ) {
 			echo "success";

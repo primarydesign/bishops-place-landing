@@ -150,7 +150,6 @@ $('a.checkbox').on('click', function() {
       var clearance = 0;
 
       clearance += valCheckbox('apt-type');
-      console.log(clearance);
 
       $('.field').each(function(){
          clearance += validate($(this));
