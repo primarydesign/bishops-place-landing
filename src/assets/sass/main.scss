@@ -46,7 +46,7 @@ a {
 body {
   position: relative;
   text-align: center;
-  background-color: eee;
+  background-color: #eee;
 }
 
 /* MODULARS */
@@ -114,19 +114,19 @@ body {
   // 1115,815
   @include aspect-ratio(1115,815);
   height: 80vh;
-  background-image: url("../img/man-relaxing.jpg");
-  background-position: 60% 100%;
+  background-image: url("../img/man-enjoying-tablet.jpg");
+  background-position: 60% 60%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 260%;
   margin-left: 0;
   margin-top: 0;
 
   .logo {
     height: 30%;
     position: absolute;
-    top: 6%;
+    top: 40%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%,-50%);
     z-index: 2;
   }
 
@@ -145,18 +145,23 @@ body {
   }
 
   @media (min-width: 500px) {
-    background-position: 70% 30%;
-    background-size: cover;
+    background-position: 65% 50%;
+    background-size: 220%;
+    .logo {
+      top: 6%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
   }
 
   @media (min-width: 641px) {
-    background-position: 80% 31%;
-    background-size: cover;
+    background-position: 90% 65%;
+    background-size: 165%;
   }
 
   @media (min-width: $mobile-min-width),
   (orientation:landscape) {
-    background-position: 70% 25%;
+    background-position: 93% 50%;
     background-size: 155%;
   }
 }
@@ -243,10 +248,10 @@ body {
   // 775,960
   @include aspect-ratio(333.594,410.8597);
   height: 80vh;
-  background-image: url("../img/sunset-couple.jpg");
-  background-position: center 30%;
+  background-image: url("../img/friends-toasting.jpg");
+  background-position:72% 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 190%;
 
   .letter {
     height: 90%;
@@ -256,6 +261,8 @@ body {
   }
 
   @media (min-width: $mobile-min-width) {
+    background-position: 72% 95%;
+    background-size: 195%;
     .letter {
       height: 80%;
     }
